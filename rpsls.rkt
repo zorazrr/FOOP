@@ -1,0 +1,28 @@
+(define (name-to-number thing)
+  (cond ((equal? thing 'rock) 1)
+        ((equal? thing 'spock) 2)
+        ((equal? thing 'paper) 3)
+        ((equal? thing 'lizard) 4)
+        ((equal? thing 'scissors) 5)))
+        
+(define (number-to-name num)
+  (cond ((= num 1) '(rock))
+        ((= num 2) '(spock))
+        ((= num 3) '(paper))
+        ((= num 4) '(lizard))
+        ((= num 5) '(scissors))))
+
+(define (computer-choice)
+  (+ (random 5) 1))
+
+(define (rpsls thing)
+  (let ((player (name-to-number thing))
+        (computer (computer-choice)))
+  (cond ((or (= (modulo (+ (- computer player) 5) 5) 1)
+             (= (modulo (+ (- computer player) 5) 5) 2))
+         (se '(Human went) thing '(! Computer went) (number-to-name computer) '(! Computer wins!)))
+        ((or (= (modulo (+ (- computer player) 5) 5) 3)
+             (= (modulo (+ (- computer player) 5) 5) 4))
+         (se '(Human went) thing '(! Computer went) (number-to-name computer) '(! Human wins!)))
+        (else
+         (se '(Both players went) thing '(!Tie!))))))
